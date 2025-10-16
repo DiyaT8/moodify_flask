@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moodify</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- Background -->
+<img id="background" src="{{ url_for('static', filename='images/person_headphones.png') }}" alt="Background Person">
+
+<!-- Split Screen Container -->
+<div class="main-container" id="formContainer">
+
+  <!-- Left Side: Title & Description -->
+  <div class="left-side">
+      <div class="logo-container" id="logoContainer">
+          <img src="{{ url_for('static', filename='images/iph-removebg-preview.png') }}" alt="Moodify Logo" id="transitionLogo">
+          <div id="analyzingText">Analyzing...</div>
+      </div>
+      <h1 class="title">Moodify</h1>
+      <p class="description">
+        Discover music that matches your mood instantly — type how you feel and get hand-picked songs curated just for you!
+      </p>
+  </div>
+
+  <!-- Right Side: Mood Input -->
+  <div class="right-side">
+      <p class="subtitle">Tell us how you're feeling, and we'll find the perfect songs to match your mood!</p>
+
+      <div class="input-row">
+          <textarea id="mood_text" placeholder="I'm so angry about what happened earlier..."></textarea>
+          <button id="voiceBtn" class="voice-btn">🎤</button>
+          <button id="submitBtn" class="arrow-btn">➤</button>
+      </div>
+
+      <div class="preset-moods">
+          <button class="preset">I'm feeling great today!</button>
+          <button class="preset">Having a rough time...</button>
+          <button class="preset">Need some motivation</button>
+          <button class="preset">Want to relax and chill</button>
+      </div>
+  </div>
+
+</div>
+
+<!-- Results Section -->
+<div class="results-section" id="resultsSection" style="display:none;">
+    <div class="results-header">
+        <h2>Perfect Songs for Your Mood</h2>
+        <p>Curated just for you • Ready to play on YouTube</p>
+        <button id="analyzeAgain">Analyze Again</button>
+    </div>
+    <div id="results" class="songs-grid"></div>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

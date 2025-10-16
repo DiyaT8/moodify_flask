@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+/* ---------------- General ---------------- */
+body {
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    color:#fff;
+    overflow-x:hidden;
+    position: relative;
+    background:#000;
+}
+
+/* Background image */
+#background {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+    opacity:0.3;
+}
+
+/* Main Split Container */
+.main-container {
+    display:flex;
+    height:100vh;
+    width:100%;
+}
+
+/* Left Side */
+.left-side {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start; /* changed from center to start */
+    align-items:flex-start;
+    padding-left:150px;
+    padding-top:300px; /* added extra space from top to move content down */
+    position: relative;
+}
+
+.left-side .title {
+    font-size:60px;
+    font-weight:900;
+    line-height:1.1;
+    margin-bottom:10px;
+}
+
+.left-side .description {
+    font-size:18px;
+    font-weight:400;
+    max-width:400px;
+    line-height:1.5;
+    color:#ccc;
+    margin-top:20px; /* optional extra spacing between title and paragraph */
+}
+
+/* Right Side */
+.right-side {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    margin-left:400px;
+    padding-right:100px;
+}
+
+textarea {
+    flex:1.2;
+    border-radius:12px;
+    border:1px solid #555;
+    padding:10px;
+    font-size:14px;
+    height:60px;
+    resize:none;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    min-width: 250px;
+}
+
+.voice-btn, .arrow-btn {
+    background:none;
+    border:none;
+    color:#06b6d4;
+    padding:0;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.preset-moods {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:10px;
+}
+.preset-moods .preset {
+    background: rgba(200,200,200,0.5);
+    border:none;
+    border-radius:12px;
+    padding:8px 12px;
+    cursor:pointer;
+    color:#000;
+    font-weight:600;
+    transition: all 0.2s ease;
+}
+.preset-moods .preset:hover { background: rgba(200,200,200,0.8); }
+
+/* ---------------- Transition Logo ---------------- */
+.logo-container {
+    position: absolute;
+    top: 15%; /* slightly higher so big logo fits */
+    left: 150px; 
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    pointer-events:none;
+    z-index:20;
+    opacity:1;
+    transition: all 1s ease;
+}
+
+#transitionLogo {
+    width: 220px; /* increased a bit more */
+    height: auto;
+    transition: all 3s ease;
+}
+
+#analyzingText {
+    margin-top:120px; /* moved further down to not overlap the logo */
+    font-size:20px;
+    color:#aaa;
+    font-weight:600;
+    opacity:0;
+    transition: all 0.5s ease;
+}
+
+/* Active animation: move to center and scale */
+.logo-container.active #transitionLogo {
+    transform: translate(-50%, -50%) scale(2.2);
+    position: fixed;
+    top:50%;
+    left:50%;
+}
+
+.logo-container.active #analyzingText {
+    opacity:1;
+    position: fixed;
+    top:calc(50% + 150px);
+    left:50%;
+    transform: translateX(-50%);
+}
+
+/* Fade out animation: move back to left and disappear */
+.logo-container.fade-out #transitionLogo {
+    transform: translateX(-150px) scale(1);
+    opacity:0;
+    transition: all 1s ease;
+    position: absolute;
+    top:15%;
+    left:150px;
+}
+
+.logo-container.fade-out #analyzingText {
+    opacity:0;
+}
+
+
+
+/* Blur overlay */
+body.blur::before {
+    content:"";
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: rgba(0,0,0,0.5);
+    z-index:15;
+}
+
+/* ---------------- Results Section ---------------- */
+.results-section {
+    width:95%;
+    max-width:1200px;
+    margin:50px auto;
+    color:#fff;
+}
+
+.results-header {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.results-header h2 {
+    font-size:28px;
+    font-weight:700;
+    margin:0;
+}
+
+.results-header p {
+    font-size:16px;
+    color:#ccc;
+    margin:5px 0 20px 0;
+    text-align:center;
+}
+
+#analyzeAgain {
+    padding:10px 20px;
+    border:none;
+    background: rgba(100,100,100,0.6);
+    color:#fff;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    transition: all 0.2s ease;
+    margin-bottom:20px;
+}
+#analyzeAgain:hover { background: rgba(100,100,100,0.8); }
+
+/* Songs Grid */
+.songs-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+    gap:20px;
+}
+
+.song-card {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background: rgba(0,0,0,0.7);
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    text-decoration:none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.song-card img { width:100%; height:140px; object-fit:cover; border-radius:12px 12px 0 0; }
+
+.song-card .song-info { padding:10px; text-align:center; display:flex; flex-direction:column; gap:4px; }
+
+.song-card .song-title { font-weight:700; font-size:14px; color:#fff; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; text-overflow:ellipsis; word-break:break-word; }
+
+.song-card .song-artist { font-weight:400; font-size:12px; color:#ccc; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:1; overflow:hidden; text-overflow:ellipsis; word-break:break-word; }
+
+.song-card:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.6); }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1200px) { .songs-grid { grid-template-columns: repeat(4,1fr); } }
+@media (max-width: 992px) { .songs-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 768px) { .songs-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 480px) {
+    .songs-grid { grid-template-columns: 1fr; }
+    .left-side { padding-left:30px; }
+    .right-side { margin-left:20px; padding-right:30px; padding:20px; }
+    .left-side .title { font-size:36px; }
+    .logo-container { left: 20px; top: 15%; }
+}
